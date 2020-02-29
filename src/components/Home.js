@@ -29,19 +29,28 @@ export default class Home extends Component {
 
     render() {
         return (
-        <div>
+        <div class="ui link cards">
             {
                 this.state.articles.map(article => {
                     return (
-                        <div key={article._id}>
-                            <h1>{article.Titolo}</h1>
-                            <h2>{article.Testo}</h2>
-                        </div>
+                            <div class="card" key={article._id}>
+                                <div class="image">
+                                    <img src={article.Immagine}></img>
+                                </div>
+                                <div class="content">
+                                    <a class="header">{article.Titolo}</a>
+                                    <div class="meta">
+                                    <span class="date">2/29/2020</span>
+                                    </div>
+                                    <div class="description">
+                                        {article.Testo}
+                                    </div>
+                                </div>
+                            </div>
                     )
                 })
             }
         </div>)
-
     }
 }
 
