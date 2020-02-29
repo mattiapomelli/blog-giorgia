@@ -11,7 +11,7 @@ const isActive = (history, path) => {
 }
 const MenuBar = withRouter(({history}) => (
 
-  <Menu stackable>
+  <Menu stackable className="ui fixed menu">
         <Link to="/" >
             <Menu.Item
             style={isActive(history, "/")}>

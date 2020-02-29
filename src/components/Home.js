@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import 'semantic-ui-css/semantic.min.css'
 
 export default class Home extends Component {
 
@@ -29,20 +30,20 @@ export default class Home extends Component {
 
     render() {
         return (
-        <div class="ui link cards">
+        <div className="ui stackable link cards" style={{"margin": "4%"}}>
             {
                 this.state.articles.map(article => {
                     return (
-                            <div class="card" key={article._id}>
-                                <div class="image">
+                            <div className="card" key={article._id} style={{"margin": "1.6%"}}>
+                                <div className="image">
                                     <img src={article.Immagine}></img>
                                 </div>
-                                <div class="content">
-                                    <a class="header">{article.Titolo}</a>
-                                    <div class="meta">
-                                    <span class="date">2/29/2020</span>
+                                <div className="content">
+                                    <a className="header">{article.Titolo}</a>
+                                    <div className="meta">
+                                    <span className="date">2/29/2020</span>
                                     </div>
-                                    <div class="description">
+                                    <div className="description">
                                         {article.Testo}
                                     </div>
                                 </div>
