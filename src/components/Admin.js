@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import { Button, Form, Grid, Container, Card, Image,Modal, GridColumn } from "semantic-ui-react";
 import axios from "axios";
-import Cookies from "universal-cookie";
+import Cookies from "universal-cookie"; // PACCHETTO PER SETTARE E RITROVARE I COOKIE
 import ModaleModifica from './subComponents/ModaleModifica'
 import ModaleElimina from './subComponents/ModaleElimina'
+//PROCEDURA PER IL FILE .ENV 
 const dotenv = require("dotenv");
 dotenv.config();
+
+
 const cookies = new Cookies();
 
 export default class Admin extends Component {
+    //STATO
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +24,7 @@ export default class Admin extends Component {
       modalOpenM:false,
     };
   }
-
+//RICEVE GLI ARTICOLI AL MOUNT
   componentDidMount() {
     axios
       .get("http://localhost:4000/Blog/")
@@ -29,11 +33,12 @@ export default class Admin extends Component {
       })
       .catch(x => {});
   }
-
+    //FUNZIONE PER CHIUDERE LA MODALE DELL'ELIMINA
   handleClose= () => {this.setState({modalOpen:false})}
+    //FUNZIONE PER CHIUDERE LA MODALE DEL MODIFICA
   handleCloseM= () => {this.setState({modalOpenM:false})}
 
-
+  //FUNZIONE PER MANTENERE LE INFORMAZIONI QUANDO SCRIVI DA TASTIERA
   handleChange(e) {
     // If you are using babel, you can use ES 6 dictionary syntax
     let change = {
@@ -42,6 +47,7 @@ export default class Admin extends Component {
     this.setState(change);
   }
 
+  //FUNZIONE AL SUBMIT DEL FORM
   handleSubmit(event) {
     if (
       this.state.psw === process.env.REACT_APP_PSW &&
@@ -53,17 +59,19 @@ export default class Admin extends Component {
   }
 
   render() {
+      //FUNZIONI PER SETTARE L'ITEM CORRENTE E APRIRE LA MODALE DI RIFERIMENTO
     this.handleShowM = (item) => {
         this.setState({activeItem:item}, ()=> this.setState({ modalOpenM: true }));
      };
      this.handleShow = (item) => {
         this.setState({activeItem:item}, ()=> this.setState({ modalOpen: true }));
      };
-    return(this.state.psw === process.env.REACT_APP_PSW &&
-      this.state.utente === process.env.REACT_APP_UTENTE &&
-      this.state.show === true) ||
-      (process.env.REACT_APP_PSW === cookies.get("psw") &&
-        cookies.get("user") === process.env.REACT_APP_UTENTE) ? (
+    return(
+    this.state.psw === process.env.REACT_APP_PSW && this.state.utente === process.env.REACT_APP_UTENTE && this.state.show === true) // UTENTE HA SCRITTO USERNAME E PASSWORD GIUSTI ED HA CLICCATO SUBMIT
+        ||
+    (process.env.REACT_APP_PSW === cookies.get("psw") && cookies.get("user") === process.env.REACT_APP_UTENTE) // UTENTE GIÀ FATTO L'ACCESSO IN PASSATO
+        ?//SE VERO ALLORA
+        (
       <Container
         style={{
           marginTop: "7em"
@@ -78,6 +86,7 @@ export default class Admin extends Component {
         </style>
         {/* <Card.Group itemsPerRow={3} doubling> */}
         <Grid stackable centered columns={3}>
+            {/* MAPPO GLI ARTICOLI */}
           {this.state.data.map(article => (
             <Grid.Column key={article._id}>
               <Card key={article._id} >
@@ -94,6 +103,7 @@ export default class Admin extends Component {
                     margin: "3%"
                   }}
                 >
+                    {/* AGGIUNGO I BOTTONI MODIFICA ED ELIMINA */}
                   <Grid centered stackable columns={3}>
                       <Grid.Column><Button onClick={()=> this.handleShowM(article)} positive>modifica</Button></Grid.Column>
                   <Grid.Column><Button onClick={()=> this.handleShow(article)} negative>elimina</Button></Grid.Column>
@@ -105,7 +115,9 @@ export default class Admin extends Component {
 
         </Grid>
         {/* </Card.Group> */}
+        
         <Grid.Column>
+            {/* MODALI */}
                         <Modal open={this.state.modalOpenM}>
                             <ModaleModifica close={this.handleCloseM} articolo = {this.state.activeItem}></ModaleModifica>
                         </Modal>
@@ -118,11 +130,15 @@ export default class Admin extends Component {
                     </Grid.Column>
       </Container>
 
-    ) : (
+    )
+        : //SE LA CONDIZIONE ALL'INIZIO INVECE è FALSA ALLORA
+    (
+        //MOSTRO IL FORM DEL LOGIN ADMIN
         <Container>
       <center>
         <div>
           <Form size="large" onSubmit={this.handleSubmit.bind(this)}>
+              {/* NOME UTENTE */}
             <Form.Field>
               <label>Utente</label>
               <input
@@ -132,6 +148,7 @@ export default class Admin extends Component {
                 onChange={this.handleChange.bind(this)}
               />
             </Form.Field>
+            {/* PASSWORD */}
             <Form.Field>
               <label>Password</label>
               <input
@@ -142,9 +159,12 @@ export default class Admin extends Component {
                 onChange={this.handleChange.bind(this)}
               />
             </Form.Field>
+            {/* SUBMIT */}
             <Button
               positive="positive"
               type="submit"
+              //AL CLICK DEL BOTTONE SETTO I COOKIE CON LE CREDENZIALI -> SE LE CREDENZIALI SONO GIUSTE ALLORA AL PROSSIMO
+              //INGRESSO L'UTENTE NON DEVE DI NUOVO FARE L'ACCESSO
               onClick={x => {
                 cookies.set("user", this.state.utente, { path: "/admin" });
                 cookies.set("psw", this.state.psw, { path: "/admin" });
