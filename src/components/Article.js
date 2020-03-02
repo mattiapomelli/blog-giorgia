@@ -24,7 +24,7 @@ export default class Article extends React.Component {
                 title:x.data.Titolo,
                 date:x.data.Data,
                 text:x.data.Testo,
-                image:x.data.Immagine})
+                image:x.data.Immagine })
         })
         .catch(x=>{
             alert("errore")
