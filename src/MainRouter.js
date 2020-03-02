@@ -5,6 +5,7 @@ import About from './components/About'
 import Contact from './components/Contact'
 import Admin from './components/Admin'
 import Menu from './components/Menu'
+import Article from './components/Article'
 import { Divider, Container } from 'semantic-ui-react'
 
 
@@ -22,6 +23,7 @@ export default class MainRouter extends Component {
             <Route path="/about" component={About}/>
             <Route path="/contact" component={Contact}/>
             <Route path="/admin" component={Admin}/>
+            <Route path="/articolo" component={Article}/>
         </Switch>
     </div>)
   }
