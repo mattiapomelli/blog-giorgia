@@ -5,13 +5,13 @@ import 'semantic-ui-css/semantic.min.css'
 
 const isActive = (history, path) => {
   if (history.location.pathname === path)
-    return {color: '#ff4081'}
+    return {color: '#ffffff', backgroundColor: '#7cbdbf'}
   else
-    return {color: '#000000'}
+    return {color: '#ffffff'}
 }
 const MenuBar = withRouter(({history}) => (
 
-  <Menu stackable>
+  <Menu stackable size='huge' className="ui top fixed menu" style={{backgroundColor: '#87D1D4', textAlign: 'center'}}>
         <Link to="/" >
             <Menu.Item
             style={isActive(history, "/")}>
