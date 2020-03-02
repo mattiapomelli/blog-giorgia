@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import { Button, Form,Grid,Container,Card,Image } from 'semantic-ui-react'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
+const dotenv = require('dotenv');
+dotenv.config();
 const cookies = new Cookies();
 
 export default class Admin extends Component {
@@ -33,7 +35,7 @@ export default class Admin extends Component {
       }
 
   handleSubmit(event) {
-    if ( this.state.psw === process.env.REACT_APP_PSW && this.state.utente === "Giorgia" && this.state.show === false){
+    if ( this.state.psw === process.env.REACT_APP_PSW && this.state.utente === process.env.REACT_APP_UTENTE&& this.state.show === false){
         this.setState({show:true});
     }
   }
@@ -41,7 +43,7 @@ export default class Admin extends Component {
 
     render() {
      return (
-        (this.state.psw === process.env.REACT_APP_PSW && this.state.utente === "Giorgia" && this.state.show === true) || (process.env.REACT_APP_PSW===cookies.get('psw') && cookies.get('user')==="Giorgia") ? 
+        (this.state.psw === process.env.REACT_APP_PSW && this.state.utente === process.env.REACT_APP_UTENTE && this.state.show === true) || (process.env.REACT_APP_PSW===cookies.get('psw') && cookies.get('user')===process.env.REACT_APP_UTENTE) ? 
 
             <Container style={{ marginTop: '7em'}}>
             <style>
