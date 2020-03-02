@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Grid, Container, Card, Image,Modal } from "semantic-ui-react";
+import { Button, Form, Grid, Container, Card, Image,Modal, GridColumn } from "semantic-ui-react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import ModaleModifica from './subComponents/ModaleModifica'
@@ -17,7 +17,7 @@ export default class Admin extends Component {
       show: false,
       data: [],
       modalOpen:false,
-      modalOpenM:false
+      modalOpenM:false,
     };
   }
 
@@ -31,9 +31,8 @@ export default class Admin extends Component {
   }
 
   handleClose= () => {this.setState({modalOpen:false})}
-  handleOpen = () => {this.setState({modalOpen:true})}
   handleCloseM= () => {this.setState({modalOpenM:false})}
-  handleOpenM = () => {this.setState({modalOpenM:true})}
+
 
   handleChange(e) {
     // If you are using babel, you can use ES 6 dictionary syntax
@@ -54,6 +53,12 @@ export default class Admin extends Component {
   }
 
   render() {
+    this.handleShowM = (item) => {
+        this.setState({activeItem:item}, ()=> this.setState({ modalOpenM: true }));
+     };
+     this.handleShow = (item) => {
+        this.setState({activeItem:item}, ()=> this.setState({ modalOpen: true }));
+     };
     return(this.state.psw === process.env.REACT_APP_PSW &&
       this.state.utente === process.env.REACT_APP_UTENTE &&
       this.state.show === true) ||
@@ -90,25 +95,29 @@ export default class Admin extends Component {
                   }}
                 >
                   <Grid centered stackable columns={3}>
-                    <Grid.Column>
-                        <Modal open={this.state.modalOpenM} trigger={<Button onClick={this.handleOpenM} positive>modifica</Button>}>
-                            <ModaleModifica close={this.handleCloseM} articolo = {article}></ModaleModifica>
-                        </Modal>
-                      
-                    </Grid.Column>
-                    <Grid.Column>
-                      <Modal open={this.state.modalOpen} trigger={<Button onClick={this.handleOpen} negative>elimina</Button>}>
-                            <ModaleElimina close={this.handleClose} id={article._id}></ModaleElimina>
-                      </Modal>
-                    </Grid.Column>
+                      <Grid.Column><Button onClick={()=> this.handleShowM(article)} positive>modifica</Button></Grid.Column>
+                  <Grid.Column><Button onClick={()=> this.handleShow(article)} negative>elimina</Button></Grid.Column>
                   </Grid>
                 </div>
               </Card>
             </Grid.Column>
           ))}
+
         </Grid>
         {/* </Card.Group> */}
+        <Grid.Column>
+                        <Modal open={this.state.modalOpenM}>
+                            <ModaleModifica close={this.handleCloseM} articolo = {this.state.activeItem}></ModaleModifica>
+                        </Modal>
+                      
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Modal open={this.state.modalOpen}>
+                            <ModaleElimina close={this.handleClose} articolo={this.state.activeItem}></ModaleElimina>
+                      </Modal>
+                    </Grid.Column>
       </Container>
+
     ) : (
         <Container>
       <center>
