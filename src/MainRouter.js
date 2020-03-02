@@ -5,9 +5,10 @@ import About from './components/About'
 import Contact from './components/Contact'
 import Admin from './components/Admin'
 import Menu from './components/Menu'
+import Nav from './components/Nav'
 import Article from './components/Article'
 import { Divider, Container } from 'semantic-ui-react'
-
+import './index.css'
 
 
 export default class MainRouter extends Component {
@@ -15,9 +16,8 @@ export default class MainRouter extends Component {
 
   render() {
     return (<div>
-        <Container><Menu/></Container>
-        <Divider />
-        <Divider />
+        <nav><Nav /></nav>
+        <div className="main">
         <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
@@ -25,6 +25,7 @@ export default class MainRouter extends Component {
             <Route path="/admin" component={Admin}/>
             <Route path="/articolo" component={Article}/>
         </Switch>
+        </div>
     </div>)
   }
 }
