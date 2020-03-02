@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import 'semantic-ui-css/semantic.min.css'
+import { Grid, Image, Card, Container } from 'semantic-ui-react'
 
 export default class Home extends Component {
 
@@ -28,9 +29,9 @@ export default class Home extends Component {
             
     }
 
-    render() {
+    /*render() {
         return (
-        <div className="ui stackable link cards" style={{"margin": "4%"}}>
+        <div className="ui stackable link cards" style={{"margin": "130px 4% 4% 4%"}}>
             {
                 this.state.articles.map(article => {
                     return (
@@ -52,6 +53,41 @@ export default class Home extends Component {
                 })
             }
         </div>)
+    }*/
+
+    render(){
+        return(
+            <Container style={{ marginTop: '7em'}}>
+            <style>
+            {`
+            html, body {
+                background-color: #f6f6f6 !important;
+            }
+            `}
+            </style>
+            {/* <Card.Group itemsPerRow={3} doubling> */}
+            <Grid stackable columns={3}>
+                 {this.state.articles.map(article =>
+                    <Grid.Column key={article._id}>
+                        <Card key={article._id} href={`/${article.Titolo}`}>
+                            <Image src={article.Immagine} wrapped ui={false} />
+                            <Card.Content>
+                            <Card.Header>{article.Titolo}</Card.Header>
+                            <Card.Meta>
+                                <span className='date'>1/3/2020</span>
+                            </Card.Meta>
+                            <Card.Description>
+                                {article.Testo}
+                            </Card.Description>
+                            </Card.Content>
+                        </Card>
+                    </Grid.Column>
+                    )}
+            </Grid>
+            {/* </Card.Group> */}
+            </Container>
+
+        )
     }
 }
 
