@@ -17,6 +17,7 @@ export default class MainRouter extends Component {
   render() {
     return (<div>
         <nav><Nav /></nav>
+        <div className="main">
         <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
@@ -24,6 +25,7 @@ export default class MainRouter extends Component {
             <Route path="/admin" component={Admin}/>
             <Route path="/articolo" component={Article}/>
         </Switch>
+        </div>
     </div>)
   }
 }

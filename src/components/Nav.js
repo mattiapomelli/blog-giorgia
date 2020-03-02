@@ -15,6 +15,10 @@ const Navigation = styled.header`
   height: 140px;
   margin-bottom: 60px;
   background: #87D1D4;
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+  z-index: 6;
 
   .logo a {
     padding-top: 33px;
@@ -99,7 +103,7 @@ const Navigation = styled.header`
     height: auto;
     min-height: 50px;
     display: block;
-    position: relative;
+    position: fixed;
     .logo {
       width: 100%;
       display: block;

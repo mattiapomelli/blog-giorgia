@@ -36,3 +36,10 @@ h1 {
   font-size: 3em;
   font-weight: 600;
 }
+
+
+
+.main {
+    position: relative;
+    margin-top: 15em;
+}

@@ -57,7 +57,7 @@ export default class Home extends Component {
 
     render(){
         return(
-            <Container style={{ marginTop: '7em'}}>
+            <Container style={{ marginTop: '0em'}}>
             <style>
             {`
             html, body {
