@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import { Button, Form,Grid,Container,Card,Image } from 'semantic-ui-react'
 import axios from 'axios'
-
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 export default class Admin extends Component {
     constructor(props){
@@ -14,6 +15,17 @@ export default class Admin extends Component {
         }
     } 
 
+    componentDidMount(){
+        axios.get("http://localhost:4000/Blog/")
+        .then(x=>{
+            this.setState({data:x.data});
+
+        })
+        .catch(x=>{
+
+        })
+    }
+
     handleChange(e) {
         // If you are using babel, you can use ES 6 dictionary syntax
          let change = { [e.target.name] : e.target.value }
@@ -23,21 +35,15 @@ export default class Admin extends Component {
   handleSubmit(event) {
     if ( this.state.psw === process.env.REACT_APP_PSW && this.state.utente === "Giorgia" && this.state.show === false){
         this.setState({show:true});
-        axios.get("http://localhost:4000/Blog/")
-        .then(x=>{
-            this.setState({data:x.data})
-        })
-        .catch(x=>{
-
-        })
     }
-    console.log(this.state.data);
   }
+
 
     render() {
      return (
-        this.state.psw === process.env.REACT_APP_PSW && this.state.utente === "Giorgia" && this.state.show === true  ?
-<Container style={{ marginTop: '7em'}}>
+        (this.state.psw === process.env.REACT_APP_PSW && this.state.utente === "Giorgia" && this.state.show === true) || (process.env.REACT_APP_PSW===cookies.get('psw') && cookies.get('user')==="Giorgia") ? 
+
+            <Container style={{ marginTop: '7em'}}>
             <style>
             {`
             html, body {
@@ -79,7 +85,7 @@ export default class Admin extends Component {
                 <label>Password</label>
                 <input placeholder='Password' type="password" value={this.state.psw} name="psw" onChange={this.handleChange.bind(this)} />
             </Form.Field>
-            <Button positive type='submit'>Submit</Button>
+            <Button positive type='submit' onClick={x=>{cookies.set('user', this.state.utente, { path: '/admin' });cookies.set('psw', this.state.psw, { path: '/admin' })}}>Submit</Button>
         </Form>
 
         </div>
