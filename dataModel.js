@@ -10,6 +10,9 @@ let Articolo = new Schema({
     Testo: {
         type:String
     },
+    Sottotitolo:{
+        type:String
+    },
     Immagine:{
         type: String
     }

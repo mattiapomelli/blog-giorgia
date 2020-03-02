@@ -39,6 +39,7 @@ gioRoutes.route('/update/:id').post(function (req, res) {
         art.Data = req.body.Data;
         art.Titolo = req.body.Titolo;
         art.Testo = req.body.Testo;
+        art.Sottotitolo = req.body.Sottotitolo;
         art.Immagine = req.body.Immagine;
         art.save().then(articolo => {
                 res.json('articol updated!');
@@ -53,7 +54,7 @@ gioRoutes.route('/add').post(function (req, res) {
     articolo.save()
         .then(q => {
             res.status(200).json({
-                'song': 'article added successfully'
+                'article': 'article added successfully'
             });
         })
         .catch(err => {
