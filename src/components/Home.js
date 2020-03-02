@@ -69,15 +69,15 @@ export default class Home extends Component {
             <Grid stackable columns={3}>
                  {this.state.articles.map(article =>
                     <Grid.Column key={article._id}>
-                        <Card key={article._id} href={`/${article.Titolo}`}>
+                        <Card key={article._id} href={`/articolo?id=`+article._id}>
                             <Image src={article.Immagine} wrapped ui={false} />
                             <Card.Content>
                             <Card.Header>{article.Titolo}</Card.Header>
                             <Card.Meta>
-                                <span className='date'>1/3/2020</span>
+                                <span className='date'>{article.Data}</span>
                             </Card.Meta>
                             <Card.Description>
-                                {article.Testo}
+                                {article.Sottotitolo}
                             </Card.Description>
                             </Card.Content>
                         </Card>
