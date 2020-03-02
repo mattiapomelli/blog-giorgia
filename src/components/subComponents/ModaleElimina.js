@@ -18,7 +18,7 @@ export default class ModaleElimina extends React.Component{
 
     <Modal.Content>
       <p>
-            Sei sicura di voler cancellare questo articolo?
+            {this.props.articolo._id}
       </p>
     </Modal.Content>
     <Modal.Actions>
