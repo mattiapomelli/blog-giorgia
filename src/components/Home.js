@@ -1,20 +1,24 @@
 import React, {Component} from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Grid, Image, Card, Container } from 'semantic-ui-react'
+import { Grid, Image, Card, Container, Pagination, Divider } from 'semantic-ui-react'
+
+const AP = 12   //ARTICLE PER PAGE
 
 export default class Home extends Component {
 
     constructor() {
         super()
         this.state = {
-            articles: []
+            articles: [],
+            activePage: 1
         }
 
         this.listArticles = this.listArticles.bind(this)
+        this.handlePageChange = this.handlePageChange.bind(this)
     }
 
     componentDidMount() {
-        console.log("component did mount")
+        //console.log("component did mount")
         this.listArticles()
     }
 
@@ -22,11 +26,16 @@ export default class Home extends Component {
         fetch('http://localhost:4000/Blog')
             .then(res => res.json())
             .then(data => {
-                console.log("DATA", data)
+                //console.log("DATA", data)
                 this.setState({articles: data})
-                console.log("STATE", this.state)
+                //console.log("STATE", this.state)
             })
             
+    }
+
+    handlePageChange = (e, { activePage }) => { 
+        this.setState({ activePage })
+        document.documentElement.scrollTop = 0
     }
 
     /*render() {
@@ -57,7 +66,7 @@ export default class Home extends Component {
 
     render(){
         return(
-            <Container style={{ marginTop: '0em'}}>
+            <Container>
             <style>
             {`
             html, body {
@@ -67,7 +76,7 @@ export default class Home extends Component {
             </style>
             {/* <Card.Group itemsPerRow={3} doubling> */}
             <Grid stackable columns={3}>
-                 {this.state.articles.map(article =>
+                 {this.state.articles.slice((this.state.activePage-1)*AP, (this.state.activePage-1)*AP + AP).map(article =>
                     <Grid.Column key={article._id}>
                         <Card key={article._id} href={`/articolo?id=`+article._id}>
                             <Image src={article.Immagine} wrapped ui={false} />
@@ -85,7 +94,14 @@ export default class Home extends Component {
                     )}
             </Grid>
             {/* </Card.Group> */}
+            <Divider></Divider>
+            <Pagination
+                activePage = {this.state.activePage}
+                onPageChange={this.handlePageChange}
+                totalPages={Math.ceil(this.state.articles.length / AP)}
+            />
             </Container>
+
 
         )
     }
