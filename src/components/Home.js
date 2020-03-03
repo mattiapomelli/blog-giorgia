@@ -14,7 +14,7 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        console.log("component did mount")
+        //console.log("component did mount")
         this.listArticles()
     }
 
@@ -22,9 +22,9 @@ export default class Home extends Component {
         fetch('http://localhost:4000/Blog')
             .then(res => res.json())
             .then(data => {
-                console.log("DATA", data)
+                //console.log("DATA", data)
                 this.setState({articles: data})
-                console.log("STATE", this.state)
+                //console.log("STATE", this.state)
             })
             
     }
@@ -57,7 +57,7 @@ export default class Home extends Component {
 
     render(){
         return(
-            <Container style={{ marginTop: '0em'}}>
+            <Container>
             <style>
             {`
             html, body {

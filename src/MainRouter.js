@@ -13,11 +13,15 @@ import './index.css'
 
 export default class MainRouter extends Component {
 
+  componentDidUpdate() {
+    let el = document.getElementById("nav")
+    console.log(el.offsetHeight)
+  }
 
   render() {
     return (<div>
         <nav><Nav /></nav>
-        <div className="main">
+        <div className="main" id="main">
         <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>

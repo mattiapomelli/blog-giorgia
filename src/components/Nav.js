@@ -13,7 +13,7 @@ const Navigation = styled.header`
   align-items: center;
   padding: 0px 100px 0;
   height: 140px;
-  margin-bottom: 60px;
+  margin-bottom: 0px;
   background: #87D1D4;
   position: fixed;
   top: 0;
@@ -164,20 +164,32 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isExpanded: false
+      isExpanded: false,
     };
   }
+
   handleToggle(e) {
     e.preventDefault();
     this.setState({
       isExpanded: !this.state.isExpanded
     });
   }
+
+  setMargin() {
+    setTimeout(function(){
+        let el = document.getElementById("nav")
+        console.log(el.offsetHeight)
+        let main = document.getElementById("main")
+        main.style.marginTop = el.offsetHeight + 'px'
+    }, 400)
+    console.log('MARGIN')
+  }
+  
   render() {
     const { isExpanded } = this.state;
 
     return (
-      <Navigation>
+      <Navigation id="nav">
         <div className="logo">
           <Link to="/">
             <p>BLOG GIORGIA</p>
@@ -196,6 +208,7 @@ class Nav extends Component {
             onClick={e => this.handleToggle(e)}
           />
           <ul className={`collapsed ${isExpanded ? "is-expanded" : ""}`}>
+              {/* {this.setMargin()} */}
             <NavLink activeClassName="active" to="/">
               <li>home</li>
             </NavLink>
