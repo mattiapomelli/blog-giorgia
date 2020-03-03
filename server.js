@@ -7,6 +7,8 @@ const gioRoutes = express.Router();
 const PORT = 4000;
 let Articolo = require('./dataModel.js');
 const dotenv = require('dotenv');
+
+
 dotenv.config();
 app.use(cors());
 app.use(bodyParser.json());

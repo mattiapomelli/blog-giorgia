@@ -17,18 +17,18 @@ export default class ModaleElimina extends React.Component{
                 Authorization: process.env.REACT_APP_API_KEY
             },
             data:{}
-        }).then(x=> {alert('ELIMINATO');window.location.reload(true)})
+        }).then(x=> {console.log('ELIMINATO');window.location.reload(true)})
     }
 
     render(){
 
         return(
 <>
-<Header icon='archive' content='Archive Old Messages' />
+<Header icon='delete' content='elimina articolo' />
 
     <Modal.Content>
       <p>
-            {process.env.REACT_APP_API_KEY}
+            Sei sicura di voler eliminare definitvamente l'articolo?
       </p>
     </Modal.Content>
     <Modal.Actions>
