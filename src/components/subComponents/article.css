@@ -1,0 +1,46 @@
+h1{
+    text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+word-break: break-word;
+font-style: normal;
+letter-spacing: 0;
+box-sizing: inherit;
+margin: 0;
+font-weight: 400;
+color: rgba(0, 0, 0, 0.84);
+font-family: medium-content-title-font, Georgia, Cambria, "Times New Roman", Times, serif;
+font-size: 30px;
+line-height: 40px;
+}
+h2{
+    text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+word-break: break-word;
+box-sizing: inherit;
+font-family: medium-content-sans-serif-font, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif;
+font-style: normal;
+color: rgba(0, 0, 0, 0.54);
+letter-spacing: 0;
+line-height: 1.394;
+font-weight: 300;
+margin-bottom: -0.42em;
+font-size: 18px;
+margin-top: 0.79em;
+
+}
+p{
+    text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+box-sizing: inherit;
+margin: 0;
+font-weight: 400;
+font-style: normal;
+word-break: break-word;
+color: rgba(0, 0, 0, 0.84);
+line-height: 1.58;
+letter-spacing: -0.004em;
+font-family: medium-content-serif-font, Georgia, Cambria, "Times New Roman", Times, serif;
+margin-bottom: -0.46em;
+font-size: 18px;
+margin-top: 0.67em;
+}
