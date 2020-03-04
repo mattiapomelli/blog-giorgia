@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Grid, Icon, Menu, Label, Header, Image, Form, Segment, Button, Message, Container } from 'semantic-ui-react'
+import { Grid, Menu, Header, Form, Segment, Container } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 export default class Contact extends Component {

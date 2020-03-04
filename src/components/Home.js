@@ -6,11 +6,11 @@ const AP = (window.innerWidth > 1224) ? 9 : 6   //ARTICLE PER PAGE
 
 export default class Home extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             articles: [],
-            activePage: 1
+            activePage: this.props.activePage
         }
 
         this.listArticles = this.listArticles.bind(this)
@@ -33,9 +33,12 @@ export default class Home extends Component {
             
     }
 
-    handlePageChange = (e, { activePage }) => { 
+    handlePageChange = (e, { activePage }) => {     
         this.setState({ activePage })
         document.documentElement.scrollTop = 0
+        console.log('from home', activePage)
+        this.props.rememberPage(activePage)
+        
     }
 
     /*render() {
