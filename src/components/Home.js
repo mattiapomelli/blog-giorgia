@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Grid, Image, Card, Container, Pagination, Divider } from 'semantic-ui-react'
 
-const AP = 12   //ARTICLE PER PAGE
+const AP = (window.innerWidth > 1224) ? 9 : 6   //ARTICLE PER PAGE
 
 export default class Home extends Component {
 
@@ -98,6 +98,12 @@ export default class Home extends Component {
             <Pagination
                 activePage = {this.state.activePage}
                 onPageChange={this.handlePageChange}
+                boundaryRange={0}
+                siblingRange= {2}
+                ellipsisItem = {null}
+                firstItem={null}
+                lastItem={null}
+                size={(window.innerWidth > 1224) ? "large" : "mini"}
                 totalPages={Math.ceil(this.state.articles.length / AP)}
             />
             </Container>
