@@ -5,6 +5,8 @@ import {Modal,Form,TextArea,Button,Icon} from 'semantic-ui-react'
 
 dotenv.config();
 
+var utc = new Date().toISOString()
+
 export default class ModaleCrea extends React.Component{
     constructor(props) {
         super(props);
@@ -24,7 +26,8 @@ export default class ModaleCrea extends React.Component{
                 Titolo: this.state.Titolo,
                 Sottotitolo: this.state.Sottotitolo,
                 Immagine: this.state.Immagine,
-                Testo: this.state.Testo
+                Testo: this.state.Testo,
+                Data: utc
 
             },
             {

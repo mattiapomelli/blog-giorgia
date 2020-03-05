@@ -25,7 +25,7 @@ export default class Article extends React.Component {
       .then(x => {
         this.setState({
           title: x.data.Titolo,
-          date: x.data.Data,
+          date: x.data.Data.slice(0, 10),
           text: x.data.Testo,
           image: x.data.Immagine,
           subtitle:x.data.Sottotitolo
