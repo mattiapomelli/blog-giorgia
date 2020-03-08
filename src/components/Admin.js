@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Button, Form, Grid, Container, Card, Image,Modal, GridColumn } from "semantic-ui-react";
+import { Button, Form, Grid, Container, Card, Image,Modal} from "semantic-ui-react";
 import axios from "axios";
 import Cookies from "universal-cookie"; // PACCHETTO PER SETTARE E RITROVARE I COOKIE
 import ModaleModifica from './subComponents/ModaleModifica'
 import ModaleElimina from './subComponents/ModaleElimina'
+import ModaleCrea from './subComponents/ModaleCrea'
 //PROCEDURA PER IL FILE .ENV 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -22,6 +23,7 @@ export default class Admin extends Component {
       data: [],
       modalOpen:false,
       modalOpenM:false,
+      modalOpenC:false
     };
   }
 //RICEVE GLI ARTICOLI AL MOUNT
@@ -33,10 +35,13 @@ export default class Admin extends Component {
       })
       .catch(x => {});
   }
-    //FUNZIONE PER CHIUDERE LA MODALE DELL'ELIMINA
-  handleClose= () => {this.setState({modalOpen:false})}
-    //FUNZIONE PER CHIUDERE LA MODALE DEL MODIFICA
-  handleCloseM= () => {this.setState({modalOpenM:false})}
+     //FUNZIONE PER CHIUDERE LA MODALE DELL'ELIMINA
+    handleClose= () => {this.setState({modalOpen:false})}
+     //FUNZIONE PER CHIUDERE LA MODALE DEL MODIFICA
+    handleCloseM= () => {this.setState({modalOpenM:false})}
+     //FUNZIONE PER CHIUDERE LA MODALE CREA
+    handleCloseC= () => {this.setState({modalOpenC:false})}
+  
 
   //FUNZIONE PER MANTENERE LE INFORMAZIONI QUANDO SCRIVI DA TASTIERA
   handleChange(e) {
@@ -66,17 +71,24 @@ export default class Admin extends Component {
      this.handleShow = (item) => {
         this.setState({activeItem:item}, ()=> this.setState({ modalOpen: true }));
      };
+     this.handleShowC = () => {
+    this.setState({ modalOpenC: true });
+     };
     return(
     this.state.psw === process.env.REACT_APP_PSW && this.state.utente === process.env.REACT_APP_UTENTE && this.state.show === true) // UTENTE HA SCRITTO USERNAME E PASSWORD GIUSTI ED HA CLICCATO SUBMIT
         ||
     (process.env.REACT_APP_PSW === cookies.get("psw") && cookies.get("user") === process.env.REACT_APP_UTENTE) // UTENTE GIÀ FATTO L'ACCESSO IN PASSATO
         ?//SE VERO ALLORA
         (
-      <Container
-        style={{
-          marginTop: "7em"
-        }}
-      >
+            <>
+
+
+      <Container style={{ marginTop: "7em" }}>
+      <center>
+            <div style={{margin:"5%"}}>
+                <Button fluid  positive  onClick={this.handleShowC}>Aggiungi nuovo articolo</Button>
+            </div>
+            </center>
         <style>
           {` html,
             body {
@@ -128,8 +140,13 @@ export default class Admin extends Component {
                             <ModaleElimina close={this.handleClose} articolo={this.state.activeItem}></ModaleElimina>
                       </Modal>
                     </Grid.Column>
+                    <Grid.Column>
+                      <Modal open={this.state.modalOpenC}>
+                            <ModaleCrea close={this.handleCloseC}></ModaleCrea>
+                      </Modal>
+                    </Grid.Column>
       </Container>
-
+</>
     )
         : //SE LA CONDIZIONE ALL'INIZIO INVECE è FALSA ALLORA
     (
@@ -176,6 +193,7 @@ export default class Admin extends Component {
         </div>
       </center>
       </Container>
+      
     );
   }
 }

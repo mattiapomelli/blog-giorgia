@@ -25,7 +25,7 @@ export default class Article extends React.Component {
       .then(x => {
         this.setState({
           title: x.data.Titolo,
-          date: x.data.Data,
+          date: x.data.Data.slice(0, 10),
           text: x.data.Testo,
           image: x.data.Immagine,
           subtitle:x.data.Sottotitolo
@@ -41,8 +41,7 @@ export default class Article extends React.Component {
         <Container>
             <h1 className="title">{this.state.title}</h1>
             <h2 className="sub">{this.state.subtitle}</h2>
-            <Image style={{marginTop:"3em",marginBottom:"3em"}}  size="big" src={this.state.image} fluid></Image>
-            <hr style={{marginTop:"3em",marginBottom:"3em"}}></hr>
+            <Image style={{marginTop:"2em",marginBottom:"2em"}}  size="big" src={this.state.image} fluid></Image>
             <p className="text">{this.state.text}</p>
         </Container>
     );
