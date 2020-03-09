@@ -10,11 +10,11 @@ import Article from './components/Article'
 import './index.css'
 
 
+
 export default class MainRouter extends Component {
 
 
     constructor() {
-        console.log("constructor")
         super()
         this.state = {
             articles: [],
@@ -30,7 +30,7 @@ export default class MainRouter extends Component {
     }
 
     rememberPage(page) {
-        this.setState({activePage: page}, () => console.log("from router", this.state.activePage))  
+        this.setState({activePage: page})  
     }
 
     render() {

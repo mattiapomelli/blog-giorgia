@@ -36,7 +36,7 @@ export default class Home extends Component {
     handlePageChange = (e, { activePage }) => {     
         this.setState({ activePage })
         document.documentElement.scrollTop = 0
-        console.log('from home', activePage)
+
         this.props.rememberPage(activePage)
         
     }
