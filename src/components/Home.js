@@ -2,15 +2,15 @@ import React, {Component} from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Grid, Image, Card, Container, Pagination, Divider } from 'semantic-ui-react'
 
-const AP = 12   //ARTICLE PER PAGE
+const AP = (window.innerWidth > 1224) ? 9 : 6   //ARTICLE PER PAGE
 
 export default class Home extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             articles: [],
-            activePage: 1
+            activePage: this.props.activePage
         }
 
         this.listArticles = this.listArticles.bind(this)
@@ -33,9 +33,12 @@ export default class Home extends Component {
             
     }
 
-    handlePageChange = (e, { activePage }) => { 
+    handlePageChange = (e, { activePage }) => {     
         this.setState({ activePage })
         document.documentElement.scrollTop = 0
+
+        this.props.rememberPage(activePage)
+        
     }
 
     /*render() {
@@ -98,6 +101,12 @@ export default class Home extends Component {
             <Pagination
                 activePage = {this.state.activePage}
                 onPageChange={this.handlePageChange}
+                boundaryRange={0}
+                siblingRange= {2}
+                ellipsisItem = {null}
+                firstItem={null}
+                lastItem={null}
+                size={(window.innerWidth > 1224) ? "large" : "mini"}
                 totalPages={Math.ceil(this.state.articles.length / AP)}
             />
             </Container>

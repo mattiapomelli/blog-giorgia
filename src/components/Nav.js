@@ -212,10 +212,10 @@ class Nav extends Component {
             <NavLink activeClassName="active" to="/">
               <li>home</li>
             </NavLink>
-            <NavLink activeClassName="active" to="/about">
+            <NavLink activeClassName="active" to="/about" onClick={() => {document.documentElement.scrollTop = 0}}>
               <li>about</li>
             </NavLink>
-            <NavLink activeClassName="active" to="/contact">
+            <NavLink activeClassName="active" to="/contact" onClick={() => {document.documentElement.scrollTop = 0}}>
               <li>contact</li>
             </NavLink>
           </ul>
