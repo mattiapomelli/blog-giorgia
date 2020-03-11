@@ -4,7 +4,6 @@ import Home from './components/Home'
 import About from './components/About'
 import Contact from './components/Contact'
 import Admin from './components/Admin'
-import Menu from './components/Menu'
 import Nav from './components/Nav'
 import Article from './components/Article'
 import './index.css'
@@ -18,19 +17,25 @@ export default class MainRouter extends Component {
         super()
         this.state = {
             articles: [],
-            activePage: 1
+            activePage: 1,
+            adminActivePage: 1
         }
 
         this.rememberPage = this.rememberPage.bind(this)
+        this.rememberPageAdmin = this.rememberPageAdmin.bind(this)
     }
 
     componentDidUpdate() {
-        let el = document.getElementById("nav")
+        //let el = document.getElementById("nav")
         //console.log(el.offsetHeight)
     }
 
     rememberPage(page) {
         this.setState({activePage: page})  
+    }
+
+    rememberPageAdmin(page) {
+        this.setState({adminActivePage: page}) 
     }
 
     render() {
@@ -41,7 +46,7 @@ export default class MainRouter extends Component {
                 <Route exact path="/" render={() => <Home activePage={this.state.activePage} rememberPage={this.rememberPage}/>}/>
                 <Route path="/about" component={About}/>
                 <Route path="/contact" component={Contact}/>
-                <Route path="/admin" component={Admin}/>
+                <Route path="/admin" render={() => <Admin activePage={this.state.adminActivePage} rememberPage={this.rememberPageAdmin}/>}/>
                 <Route path="/articolo" component={Article}/>
             </Switch>
             </div>

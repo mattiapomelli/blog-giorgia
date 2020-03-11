@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const Navigation = styled.header`
   width: 100%;
-  border-bottom: 10px solid #d4d4d4;
+  border-bottom: 10px solid #84CEEB;
   z-index: 1;
   display: flex;
   justify-content: space-between;
@@ -14,7 +14,7 @@ const Navigation = styled.header`
   padding: 0px 100px 0;
   height: 140px;
   margin-bottom: 0px;
-  background: #87D1D4;
+  background: #5AB9EA;
   position: fixed;
   top: 0;
   overflow: hidden;
@@ -55,8 +55,7 @@ const Navigation = styled.header`
     color: #ccc;
   }
   a {
-    color: #222;
-    opacity: 0.65;
+    opacity: 0.8;
     transition: all 0.6s;
     color: #222;
     font-size: 1em;
@@ -75,7 +74,7 @@ const Navigation = styled.header`
       justify-content: space-between;
     }
     li {
-        color: #fff;
+        color: #fff;        
       margin: 0 15px;
       justify-content: space-between;
       font-size: 1.6em;
@@ -100,7 +99,7 @@ const Navigation = styled.header`
     }
   }
   @media only screen and (max-width: 600px) {
-    height: auto;
+    height: 60px;
     min-height: 50px;
     display: block;
     position: fixed;
@@ -111,7 +110,7 @@ const Navigation = styled.header`
       margin: 0px;
       margin-left: -5px;
       a {
-        padding: 20px 0px;
+        padding: 10px 0px;
       }
     }
     .fa-bars {
@@ -139,7 +138,7 @@ const Navigation = styled.header`
       -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
       transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 
-      &.is-expanded {
+      &.is-expanded {  
         overflow: hidden;
         max-height: 500px; /* approximate max height */
         -moz-transition-duration: 0.4s;
@@ -173,6 +172,11 @@ class Nav extends Component {
     this.setState({
       isExpanded: !this.state.isExpanded
     });
+    let el = document.getElementById("nav")
+    if (el.style.height == 'auto') 
+        el.style.height = '60px'
+    else
+        el.style.height = 'auto'
   }
 
   setMargin() {

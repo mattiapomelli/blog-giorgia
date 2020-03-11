@@ -8,7 +8,7 @@ export default class Contact extends Component {
             <Container>
             <Grid stackable textAlign='center'>
                 <Grid.Column style={{ maxWidth: 350 }}>
-                <Header as='h2' color='teal' textAlign='center'>Contact Me
+                <Header as='h2' style={{color:'#8860d0'}} textAlign='center'>Contact Me
                 </Header>
                 <Form size='large'>
                     <Segment stacked>

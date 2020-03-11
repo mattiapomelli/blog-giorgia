@@ -41,7 +41,7 @@ export default class Article extends React.Component {
         <Container>
             <h1 className="title">{this.state.title}</h1>
             <h2 className="sub">{this.state.subtitle}</h2>
-            <Image style={{marginTop:"2em",marginBottom:"2em"}}  size="big" src={this.state.image} fluid></Image>
+            <Image style={{marginTop:"2em",marginBottom:"2em"}}  size="big" src={this.state.image}></Image>
             <p className="text">{this.state.text}</p>
         </Container>
     );
