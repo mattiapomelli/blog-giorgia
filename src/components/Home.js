@@ -86,7 +86,7 @@ export default class Home extends Component {
                             <Card.Content>
                             <Card.Header>{article.Titolo}</Card.Header>
                             <Card.Meta>
-                                <span className='date'>{article.Data}</span>
+                                <span className='date'>{article.Data.slice(0, 10)}</span>
                             </Card.Meta>
                             <Card.Description>
                                 {article.Sottotitolo}

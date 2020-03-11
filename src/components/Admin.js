@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Grid, Container, Card, Image,Modal} from "semantic-ui-react";
+import { Button, Form, Grid, Container, Card, Image,Modal, Divider, Pagination} from "semantic-ui-react";
 import axios from "axios";
 import Cookies from "universal-cookie"; // PACCHETTO PER SETTARE E RITROVARE I COOKIE
 import ModaleModifica from './subComponents/ModaleModifica'
@@ -9,6 +9,7 @@ import ModaleCrea from './subComponents/ModaleCrea'
 const dotenv = require("dotenv");
 dotenv.config();
 
+const AP = (window.innerWidth > 1224) ? 9 : 6
 
 const cookies = new Cookies();
 
@@ -23,7 +24,8 @@ export default class Admin extends Component {
       data: [],
       modalOpen:false,
       modalOpenM:false,
-      modalOpenC:false
+      modalOpenC:false,
+      activePage: this.props.activePage
     };
   }
 //RICEVE GLI ARTICOLI AL MOUNT
@@ -63,6 +65,14 @@ export default class Admin extends Component {
     }
   }
 
+  handlePageChange = (e, { activePage }) => {     
+    this.setState({ activePage })
+    document.documentElement.scrollTop = 0
+
+    this.props.rememberPage(activePage)
+    
+  }
+
   render() {
       //FUNZIONI PER SETTARE L'ITEM CORRENTE E APRIRE LA MODALE DI RIFERIMENTO
     this.handleShowM = (item) => {
@@ -99,14 +109,14 @@ export default class Admin extends Component {
         {/* <Card.Group itemsPerRow={3} doubling> */}
         <Grid stackable centered columns={3}>
             {/* MAPPO GLI ARTICOLI */}
-          {this.state.data.map(article => (
+          {this.state.data.slice((this.state.activePage-1)*AP, (this.state.activePage-1)*AP + AP).map(article => (
             <Grid.Column key={article._id}>
               <Card key={article._id} >
                 <Image src={article.Immagine} wrapped ui={false} />
                 <Card.Content>
                   <Card.Header>{article.Titolo}</Card.Header>
                   <Card.Meta>
-                    <span className="date">{article.Data}</span>
+                    <span className="date">{article.Data.slice(0, 10)}</span>
                   </Card.Meta>
                   <Card.Description>{article.Sottotitolo}</Card.Description>
                 </Card.Content>
@@ -126,6 +136,19 @@ export default class Admin extends Component {
           ))}
 
         </Grid>
+
+        <Divider></Divider>
+            <Pagination
+                activePage = {this.state.activePage}
+                onPageChange={this.handlePageChange}
+                boundaryRange={0}
+                siblingRange= {2}
+                ellipsisItem = {null}
+                firstItem={null}
+                lastItem={null}
+                size={(window.innerWidth > 1224) ? "large" : "mini"}
+                totalPages={Math.ceil(this.state.data.length / AP)}
+            />
         {/* </Card.Group> */}
         
         <Grid.Column>
