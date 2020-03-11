@@ -99,7 +99,7 @@ const Navigation = styled.header`
     }
   }
   @media only screen and (max-width: 600px) {
-    height: auto;
+    height: 60px;
     min-height: 50px;
     display: block;
     position: fixed;
@@ -110,7 +110,7 @@ const Navigation = styled.header`
       margin: 0px;
       margin-left: -5px;
       a {
-        padding: 20px 0px;
+        padding: 10px 0px;
       }
     }
     .fa-bars {
@@ -138,7 +138,7 @@ const Navigation = styled.header`
       -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
       transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 
-      &.is-expanded {
+      &.is-expanded {  
         overflow: hidden;
         max-height: 500px; /* approximate max height */
         -moz-transition-duration: 0.4s;
@@ -172,6 +172,11 @@ class Nav extends Component {
     this.setState({
       isExpanded: !this.state.isExpanded
     });
+    let el = document.getElementById("nav")
+    if (el.style.height == 'auto') 
+        el.style.height = '60px'
+    else
+        el.style.height = 'auto'
   }
 
   setMargin() {
