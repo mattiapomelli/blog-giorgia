@@ -96,13 +96,13 @@ export default class Admin extends Component {
       <Container style={{ marginTop: "7em" }}>
       <center>
             <div style={{margin:"5%"}}>
-                <Button fluid  positive  onClick={this.handleShowC}>Aggiungi nuovo articolo</Button>
+                <Button fluid  positive  onClick={this.handleShowC} style={{backgroundColor: "#846587"}}>Aggiungi nuovo articolo</Button>
             </div>
             </center>
         <style>
           {` html,
             body {
-              background-color: #f6f6f6 !important;
+              background-color: #edeae5 !important;
              }
                 `}
         </style>
@@ -111,7 +111,7 @@ export default class Admin extends Component {
             {/* MAPPO GLI ARTICOLI */}
           {this.state.data.slice((this.state.activePage-1)*AP, (this.state.activePage-1)*AP + AP).map(article => (
             <Grid.Column key={article._id}>
-              <Card key={article._id} >
+              <Card key={article._id} style={{backgroundColor: "#c997ac"}}>
                 <Image src={article.Immagine} wrapped ui={false} />
                 <Card.Content>
                   <Card.Header>{article.Titolo}</Card.Header>
@@ -127,8 +127,8 @@ export default class Admin extends Component {
                 >
                     {/* AGGIUNGO I BOTTONI MODIFICA ED ELIMINA */}
                   <Grid centered stackable columns={3}>
-                      <Grid.Column><Button onClick={()=> this.handleShowM(article)} positive>modifica</Button></Grid.Column>
-                  <Grid.Column><Button onClick={()=> this.handleShow(article)} negative>elimina</Button></Grid.Column>
+                      <Grid.Column><Button onClick={()=> this.handleShowM(article)} positive style={{backgroundColor: "#846587"}}>modifica</Button></Grid.Column>
+                  <Grid.Column><Button onClick={()=> this.handleShow(article)} negative style={{backgroundColor: "#846587"}}>elimina</Button></Grid.Column>
                   </Grid>
                 </div>
               </Card>
@@ -148,6 +148,7 @@ export default class Admin extends Component {
                 lastItem={null}
                 size={(window.innerWidth > 1224) ? "large" : "mini"}
                 totalPages={Math.ceil(this.state.data.length / AP)}
+                style={{backgroundColor: "#d4abbc"}}
             />
         {/* </Card.Group> */}
         

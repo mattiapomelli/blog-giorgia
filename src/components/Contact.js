@@ -6,15 +6,22 @@ export default class Contact extends Component {
     render() {
         return (
             <Container>
+            <style>
+            {`
+            html, body {
+                background-color: #EDEAE5 !important;
+            }
+            `}
+            </style>
             <Grid stackable textAlign='center'>
                 <Grid.Column style={{ maxWidth: 350 }}>
-                <Header as='h2' style={{color:'#8860d0'}} textAlign='center'>Contact Me
+                <Header as='h2' style={{color:'#556'}} textAlign='center'>Contact Me
                 </Header>
                 <Form size='large'>
-                    <Segment stacked>
+                    <Segment stacked style={{backgroundColor: "#dcbcc9"}}>
                         <Grid centered>
                             <Grid.Row>
-                            <Menu>
+                            <Menu style={{backgroundColor: "#c997ac"}}>
                                 <Menu.Item icon="instagram">
                                 </Menu.Item>
                                 <Menu.Item>
@@ -23,7 +30,7 @@ export default class Contact extends Component {
                             </Menu>
                             </Grid.Row>
                             <Grid.Row>
-                            <Menu>
+                            <Menu style={{backgroundColor: "#c997ac"}}>
                                 <Menu.Item icon="mail outline">
                                 </Menu.Item>
                                 <Menu.Item>

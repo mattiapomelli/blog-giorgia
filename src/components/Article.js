@@ -39,6 +39,13 @@ export default class Article extends React.Component {
   render() {
     return (
         <Container>
+            <style>
+            {`
+            html, body {
+                background-color: #EDEAE5 !important;
+            }
+            `}
+            </style>
             <h1 className="title">{this.state.title}</h1>
             <h2 className="sub">{this.state.subtitle}</h2>
             <Image style={{marginTop:"2em",marginBottom:"2em"}}  size="big" src={this.state.image}></Image>

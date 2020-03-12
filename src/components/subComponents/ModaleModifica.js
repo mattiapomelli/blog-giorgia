@@ -47,8 +47,8 @@ export default class ModaleModifica extends React.Component {
   render() {
     return (
       <>
-        <Modal.Header>{this.props.articolo.Titolo}</Modal.Header>
-        <Modal.Content image>
+        <Modal.Header style={{backgroundColor: "#c997ac"}}>{this.props.articolo.Titolo}</Modal.Header >
+        <Modal.Content image style={{backgroundColor: "#c997ac"}}>
           <Image wrapped size="medium" src={this.state.Immagine} />
           <Modal.Description>
             <Form style={{ width: "30em" }}>
@@ -89,11 +89,11 @@ export default class ModaleModifica extends React.Component {
             </Form>
           </Modal.Description>
         </Modal.Content>
-        <Modal.Actions>
+        <Modal.Actions style={{backgroundColor: "#c997ac"}}>
           <Button color="grey" onClick={this.props.close}>
             <Icon name="delete" /> Annulla
           </Button>
-          <Button positive onClick={this.update.bind(this)}>
+          <Button positive onClick={this.update.bind(this)} style={{backgroundColor: "#846587"}}>
             <Icon name="checkmark" /> Modifica
           </Button>
         </Modal.Actions>

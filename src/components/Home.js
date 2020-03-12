@@ -73,7 +73,7 @@ export default class Home extends Component {
             <style>
             {`
             html, body {
-                background-color: #cad0e8 !important;
+                background-color: #EDEAE5 !important;
             }
             `}
             </style>
@@ -81,7 +81,7 @@ export default class Home extends Component {
             <Grid stackable columns={3}>
                  {this.state.articles.slice((this.state.activePage-1)*AP, (this.state.activePage-1)*AP + AP).map(article =>
                     <Grid.Column key={article._id}>
-                        <Card key={article._id} href={`/articolo?id=`+article._id} style={{backgroundColor: "#a3aedb"}}>
+                        <Card key={article._id} href={`/articolo?id=`+article._id} style={{backgroundColor: "#c997ac"}}>
                             <Image src={article.Immagine} wrapped ui={false} />
                             <Card.Content>
                             <Card.Header>{article.Titolo}</Card.Header>
@@ -108,7 +108,7 @@ export default class Home extends Component {
                 lastItem={null}
                 size={(window.innerWidth > 1224) ? "large" : "mini"}
                 totalPages={Math.ceil(this.state.articles.length / AP)}
-                style={{backgroundColor: "#cad0e8"}}
+                style={{backgroundColor: "#d4abbc"}}
             />
             </Container>
 
