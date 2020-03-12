@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Grid, Image, Card, Container, Pagination, Divider } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 const AP = (window.innerWidth > 1224) ? 9 : 6   //ARTICLE PER PAGE
 
@@ -81,7 +82,8 @@ export default class Home extends Component {
             <Grid stackable columns={3}>
                  {this.state.articles.slice((this.state.activePage-1)*AP, (this.state.activePage-1)*AP + AP).map(article =>
                     <Grid.Column key={article._id}>
-                        <Card key={article._id} href={`/articolo?id=`+article._id} style={{backgroundColor: "#c997ac"}}>
+                        <Link to={"articolo?id=" + article._id}>
+                        <Card key={article._id} style={{backgroundColor: "#c997ac"}}>
                             <Image src={article.Immagine} wrapped ui={false} />
                             <Card.Content>
                             <Card.Header>{article.Titolo}</Card.Header>
@@ -93,6 +95,7 @@ export default class Home extends Component {
                             </Card.Description>
                             </Card.Content>
                         </Card>
+                        </Link>
                     </Grid.Column>
                     )}
             </Grid>

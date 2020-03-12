@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
-import {Container,Image} from 'semantic-ui-react';
+import {Container,Image, Button} from 'semantic-ui-react';
 import "./subComponents/article.css";
+import { Link } from "react-router-dom";
 
 export default class Article extends React.Component {
   constructor(props) {
@@ -46,6 +47,9 @@ export default class Article extends React.Component {
             }
             `}
             </style>
+            <Container>
+            <Link to='/'><Button>Back</Button></Link>
+            </Container>
             <h1 className="title">{this.state.title}</h1>
             <h2 className="sub">{this.state.subtitle}</h2>
             <Image style={{marginTop:"2em",marginBottom:"2em"}}  size="big" src={this.state.image}></Image>
