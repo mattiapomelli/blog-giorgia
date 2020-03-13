@@ -18,11 +18,14 @@ export default class MainRouter extends Component {
         this.state = {
             articles: [],
             activePage: 1,
-            adminActivePage: 1
+            adminActivePage: 1,
+            search: ''
         }
 
         this.rememberPage = this.rememberPage.bind(this)
         this.rememberPageAdmin = this.rememberPageAdmin.bind(this)
+        this.updateSearch = this.updateSearch.bind(this)
+        this.cancelSearch = this.cancelSearch.bind(this)
     }
 
     componentDidUpdate() {
@@ -38,12 +41,23 @@ export default class MainRouter extends Component {
         this.setState({adminActivePage: page}) 
     }
 
+    updateSearch(event) {
+        this.setState({search: event.target.value})
+        //this.setState({activePage: 1})
+        console.log("update")
+    }
+
+    cancelSearch() {
+        this.setState({search: ''})
+    }
+
     render() {
         return (<div>
             <nav><Nav /></nav>
             <div className="main" id="main">
             <Switch>
-                <Route exact path="/" render={() => <Home activePage={this.state.activePage} rememberPage={this.rememberPage}/>}/>
+                <Route exact path="/" render={() => <Home activePage={this.state.activePage} rememberPage={this.rememberPage}
+                    search={this.state.search} updateSearch={this.updateSearch} cancelSearch={this.cancelSearch}/>}/>
                 <Route path="/about" component={About}/>
                 <Route path="/contact" component={Contact}/>
                 <Route path="/admin" render={() => <Admin activePage={this.state.adminActivePage} rememberPage={this.rememberPageAdmin}/>}/>
