@@ -23,7 +23,7 @@ export default class Article extends React.Component {
     const params = new URLSearchParams(search);
     const id = params.get("id"); // bar
     axios
-      .get("http://localhost:4000/Blog/" + id)
+      .get("http://2.238.196.146:4000/Blog/" + id)
       .then(x => {
         this.setState({
           title: x.data.Titolo,

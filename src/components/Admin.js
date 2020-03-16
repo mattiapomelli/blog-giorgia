@@ -36,7 +36,7 @@ export default class Admin extends Component {
 //RICEVE GLI ARTICOLI AL MOUNT
   componentDidMount() {
     axios
-      .get("http://localhost:4000/Blog/")
+      .get("http://2.238.196.146:4000/Blog/")
       .then(x => {
         this.setState({ data: x.data });
       })
@@ -139,6 +139,7 @@ export default class Admin extends Component {
             {/* MAPPO GLI ARTICOLI */}
           {filteredArticles.slice((this.state.activePage-1)*AP, (this.state.activePage-1)*AP + AP).map(article => (
             <Grid.Column key={article._id}>
+              <center>
               <Card key={article._id} style={{backgroundColor: "#c997ac"}}>
                 <Image src={article.Immagine} wrapped ui={false} />
                 <Card.Content>
@@ -153,19 +154,28 @@ export default class Admin extends Component {
                     margin: "3%"
                   }}
                 >
+                  
                     {/* AGGIUNGO I BOTTONI MODIFICA ED ELIMINA */}
-                  <Grid centered stackable columns={3}>
-                      <Grid.Column><Button onClick={()=> this.handleShowM(article)} positive style={{backgroundColor: "#846587"}}>modifica</Button></Grid.Column>
-                  <Grid.Column><Button onClick={()=> this.handleShow(article)} negative style={{backgroundColor: "#846587"}}>elimina</Button></Grid.Column>
+                    <center>
+                  <div>
+                  <Grid columns={2}>
+                  
+                      <Grid.Column floated="left"><Button onClick={()=> this.handleShowM(article)} positive style={{backgroundColor: "#846587"}}>Modifica</Button></Grid.Column>
+                      <Grid.Column floated="right" ><Button onClick={()=> this.handleShow(article)} negative style={{backgroundColor: "#846587"}}>Elimina</Button></Grid.Column>
+                  
                   </Grid>
+                  </div>
+                  </center>
                 </div>
               </Card>
+              </center>
             </Grid.Column>
           ))}
 
         </Grid>
-
+                  
         <Divider></Divider>
+        <center>
             <Pagination
                 activePage = {this.state.activePage}
                 onPageChange={this.handlePageChange}
@@ -178,6 +188,7 @@ export default class Admin extends Component {
                 totalPages={Math.ceil(filteredArticles.length / AP)}
                 style={{backgroundColor: "#d4abbc"}}
             />
+            </center>
         {/* </Card.Group> */}
         
         <Grid.Column>
@@ -193,7 +204,7 @@ export default class Admin extends Component {
                       </Modal>
                     </Grid.Column>
                     <Grid.Column>
-                      <Modal open={this.state.modalOpenC}>
+                      <Modal  open={this.state.modalOpenC}>
                             <ModaleCrea close={this.handleCloseC}></ModaleCrea>
                       </Modal>
                     </Grid.Column>

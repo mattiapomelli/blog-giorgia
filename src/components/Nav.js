@@ -173,7 +173,7 @@ class Nav extends Component {
       isExpanded: !this.state.isExpanded
     });
     let el = document.getElementById("nav")
-    if (el.style.height == 'auto') 
+    if (el.style.height === 'auto') 
         el.style.height = '60px'
     else
         el.style.height = 'auto'

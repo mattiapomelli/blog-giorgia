@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Grid, Image, Card, Container, Pagination, Divider, Input, Button, Icon, Segment } from 'semantic-ui-react'
+import { Grid, Image, Card, Container, Pagination, Divider, Input, Button, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 const AP = (window.innerWidth > 1224) ? 9 : 6   //ARTICLE PER PAGE
@@ -28,7 +28,7 @@ export default class Home extends Component {
     }
 
     listArticles() {
-        fetch('http://localhost:4000/Blog')
+        fetch('http://2.238.196.146:4000/Blog')
             .then(res => res.json())
             .then(data => {
                 //console.log("DATA", data)
@@ -103,7 +103,9 @@ export default class Home extends Component {
                 <Button onClick={this.cancelSearch}><Icon name="cancel"></Icon></Button>
             </Container>
             
-            {(filteredArticles.length == 0) && <Container>Nessun Risultato</Container>}
+            {(filteredArticles.length === 0 && this.state.search !== '') && <Container>Nessun Risultato</Container>}
+            <center>
+
             <Grid stackable columns={3}>
                  {filteredArticles.slice((this.state.activePage-1)*AP, (this.state.activePage-1)*AP + AP).map(article =>
                     <Grid.Column key={article._id}>
@@ -124,8 +126,10 @@ export default class Home extends Component {
                     </Grid.Column>
                     )}
             </Grid>
+            </center>
             {/* </Card.Group> */}
             <Divider></Divider>
+            <center>
             <Pagination
                 activePage = {this.state.activePage}
                 onPageChange={this.handlePageChange}
@@ -138,6 +142,7 @@ export default class Home extends Component {
                 totalPages={Math.ceil(filteredArticles.length / AP)}
                 style={{backgroundColor: "#d4abbc"}}
             />
+            </center>
             </Container>
 
 
