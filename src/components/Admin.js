@@ -177,6 +177,13 @@ export default class Admin extends Component {
         //MOSTRO IL FORM DEL LOGIN ADMIN
         <Container>
       <center>
+      <style>
+          {` html,
+            body {
+              background-color: #edeae5 !important;
+             }
+                `}
+        </style>
         <div>
           <Form size="large" onSubmit={this.handleSubmit.bind(this)}>
               {/* NOME UTENTE */}
@@ -202,7 +209,7 @@ export default class Admin extends Component {
             </Form.Field>
             {/* SUBMIT */}
             <Button
-              positive="positive"
+              style={{backgroundColor:"#c997ac "}}
               type="submit"
               //AL CLICK DEL BOTTONE SETTO I COOKIE CON LE CREDENZIALI -> SE LE CREDENZIALI SONO GIUSTE ALLORA AL PROSSIMO
               //INGRESSO L'UTENTE NON DEVE DI NUOVO FARE L'ACCESSO
