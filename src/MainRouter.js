@@ -60,7 +60,8 @@ export default class MainRouter extends Component {
                     search={this.state.search} updateSearch={this.updateSearch} cancelSearch={this.cancelSearch}/>}/>
                 <Route path="/about" component={About}/>
                 <Route path="/contact" component={Contact}/>
-                <Route path="/admin" render={() => <Admin activePage={this.state.adminActivePage} rememberPage={this.rememberPageAdmin}/>}/>
+                <Route path="/admin" render={() => <Admin activePage={this.state.adminActivePage} rememberPage={this.rememberPageAdmin}
+                    search={this.state.search} updateSearch={this.updateSearch} cancelSearch={this.cancelSearch}/>}/>
                 <Route path="/articolo" component={Article}/>
             </Switch>
             </div>
