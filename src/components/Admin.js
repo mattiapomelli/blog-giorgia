@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Grid, Container, Card, Image,Modal, Divider, Pagination} from "semantic-ui-react";
+import { Button, Form, Grid, Container, Card, Image,Modal, Divider, Pagination, Icon, Input} from "semantic-ui-react";
 import axios from "axios";
 import Cookies from "universal-cookie"; // PACCHETTO PER SETTARE E RITROVARE I COOKIE
 import ModaleModifica from './subComponents/ModaleModifica'
@@ -25,8 +25,13 @@ export default class Admin extends Component {
       modalOpen:false,
       modalOpenM:false,
       modalOpenC:false,
-      activePage: this.props.activePage
+      activePage: this.props.activePage,
+      search: this.props.search
     };
+
+    this.handlePageChange = this.handlePageChange.bind(this)
+    this.updateSearch = this.updateSearch.bind(this)
+    this.cancelSearch = this.cancelSearch.bind(this)
   }
 //RICEVE GLI ARTICOLI AL MOUNT
   componentDidMount() {
@@ -73,7 +78,24 @@ export default class Admin extends Component {
     
   }
 
+  updateSearch(event) {
+    this.props.updateSearch(event)
+    //this.setState({search: event.target.value})
+    this.setState({activePage: 1})
+  }
+
+  cancelSearch(){
+    this.props.cancelSearch()
+    this.setState({activePage: 1})
+  }
+
   render() {
+    //FILTRA GLI ARTICOLI IN BASE AL CONTENUTO DELLA BARRA DI RICERCA
+    let filteredArticles = this.state.data.filter(
+        (article) => {
+            return article.Titolo.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 || article.Sottotitolo.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+        }
+    )
       //FUNZIONI PER SETTARE L'ITEM CORRENTE E APRIRE LA MODALE DI RIFERIMENTO
     this.handleShowM = (item) => {
         this.setState({activeItem:item}, ()=> this.setState({ modalOpenM: true }));
@@ -106,10 +128,16 @@ export default class Admin extends Component {
              }
                 `}
         </style>
+        <Container textAlign="right">
+                <Input icon="search" placeholder="Search..." value={this.props.search} onChange={this.updateSearch} color='red'/>
+                <Button onClick={this.cancelSearch}><Icon name="cancel"></Icon></Button>
+        </Container>
+
+        {(filteredArticles.length == 0) && <Container>Nessun Risultato</Container>}
         {/* <Card.Group itemsPerRow={3} doubling> */}
         <Grid stackable centered columns={3}>
             {/* MAPPO GLI ARTICOLI */}
-          {this.state.data.slice((this.state.activePage-1)*AP, (this.state.activePage-1)*AP + AP).map(article => (
+          {filteredArticles.slice((this.state.activePage-1)*AP, (this.state.activePage-1)*AP + AP).map(article => (
             <Grid.Column key={article._id}>
               <Card key={article._id} style={{backgroundColor: "#c997ac"}}>
                 <Image src={article.Immagine} wrapped ui={false} />
@@ -147,7 +175,7 @@ export default class Admin extends Component {
                 firstItem={null}
                 lastItem={null}
                 size={(window.innerWidth > 1224) ? "large" : "mini"}
-                totalPages={Math.ceil(this.state.data.length / AP)}
+                totalPages={Math.ceil(filteredArticles.length / AP)}
                 style={{backgroundColor: "#d4abbc"}}
             />
         {/* </Card.Group> */}

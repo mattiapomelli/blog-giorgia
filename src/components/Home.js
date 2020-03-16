@@ -103,7 +103,7 @@ export default class Home extends Component {
                 <Button onClick={this.cancelSearch}><Icon name="cancel"></Icon></Button>
             </Container>
             
-            {(filteredArticles.length == 0 && this.state.search !== '') && <Container>Nessun Risultato</Container>}
+            {(filteredArticles.length == 0) && <Container>Nessun Risultato</Container>}
             <Grid stackable columns={3}>
                  {filteredArticles.slice((this.state.activePage-1)*AP, (this.state.activePage-1)*AP + AP).map(article =>
                     <Grid.Column key={article._id}>
