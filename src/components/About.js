@@ -7,6 +7,13 @@ export default class About extends Component {
     render() {
         return (
         <div style={{position: "relative"}}>
+            <style>
+            {`
+            html, body {
+                background-color: #EDEAE5 !important;
+            }
+            `}
+            </style>
         </div>)
 
     }

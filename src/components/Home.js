@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Grid, Image, Card, Container, Pagination, Divider } from 'semantic-ui-react'
+import { Grid, Image, Card, Container, Pagination, Divider, Input, Button, Icon, Segment } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 const AP = (window.innerWidth > 1224) ? 9 : 6   //ARTICLE PER PAGE
 
@@ -10,11 +11,15 @@ export default class Home extends Component {
         super(props)
         this.state = {
             articles: [],
-            activePage: this.props.activePage
+            activePage: this.props.activePage,
+            search: this.props.search
         }
 
         this.listArticles = this.listArticles.bind(this)
         this.handlePageChange = this.handlePageChange.bind(this)
+        this.updateSearch = this.updateSearch.bind(this)
+        this.cancelSearch = this.cancelSearch.bind(this)
+        
     }
 
     componentDidMount() {
@@ -39,6 +44,17 @@ export default class Home extends Component {
 
         this.props.rememberPage(activePage)
         
+    }
+
+    updateSearch(event) {
+        this.props.updateSearch(event)
+        //this.setState({search: event.target.value})
+        this.setState({activePage: 1})
+    }
+
+    cancelSearch(){
+        this.props.cancelSearch()
+        this.setState({activePage: 1})
     }
 
     /*render() {
@@ -68,20 +84,31 @@ export default class Home extends Component {
     }*/
 
     render(){
+        let filteredArticles = this.state.articles.filter(
+            (article) => {
+                return article.Titolo.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 || article.Sottotitolo.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1
+            }
+        )
         return(
             <Container>
             <style>
             {`
             html, body {
-                background-color: #cad0e8 !important;
+                background-color: #EDEAE5 !important;
             }
             `}
             </style>
-            {/* <Card.Group itemsPerRow={3} doubling> */}
+            <Container textAlign="right">
+                <Input icon="search" placeholder="Search..." value={this.props.search} onChange={this.updateSearch} color='red'/>
+                <Button onClick={this.cancelSearch}><Icon name="cancel"></Icon></Button>
+            </Container>
+            
+            {(filteredArticles.length == 0 && this.state.search !== '') && <Container>Nessun Risultato</Container>}
             <Grid stackable columns={3}>
-                 {this.state.articles.slice((this.state.activePage-1)*AP, (this.state.activePage-1)*AP + AP).map(article =>
+                 {filteredArticles.slice((this.state.activePage-1)*AP, (this.state.activePage-1)*AP + AP).map(article =>
                     <Grid.Column key={article._id}>
-                        <Card key={article._id} href={`/articolo?id=`+article._id} style={{backgroundColor: "#a3aedb"}}>
+                        <Link to={"articolo?id=" + article._id}>
+                        <Card key={article._id} style={{backgroundColor: "#c997ac"}}>
                             <Image src={article.Immagine} wrapped ui={false} />
                             <Card.Content>
                             <Card.Header>{article.Titolo}</Card.Header>
@@ -93,6 +120,7 @@ export default class Home extends Component {
                             </Card.Description>
                             </Card.Content>
                         </Card>
+                        </Link>
                     </Grid.Column>
                     )}
             </Grid>
@@ -107,8 +135,8 @@ export default class Home extends Component {
                 firstItem={null}
                 lastItem={null}
                 size={(window.innerWidth > 1224) ? "large" : "mini"}
-                totalPages={Math.ceil(this.state.articles.length / AP)}
-                style={{backgroundColor: "#cad0e8"}}
+                totalPages={Math.ceil(filteredArticles.length / AP)}
+                style={{backgroundColor: "#d4abbc"}}
             />
             </Container>
 

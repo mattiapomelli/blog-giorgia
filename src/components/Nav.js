@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const Navigation = styled.header`
   width: 100%;
-  border-bottom: 10px solid #84CEEB;
+  border-bottom: 10px solid #EDEAE5;
   z-index: 1;
   display: flex;
   justify-content: space-between;
@@ -14,7 +14,7 @@ const Navigation = styled.header`
   padding: 0px 100px 0;
   height: 140px;
   margin-bottom: 0px;
-  background: #5AB9EA;
+  background: #EDEAE5;
   position: fixed;
   top: 0;
   overflow: hidden;
@@ -30,7 +30,7 @@ const Navigation = styled.header`
 
     p {
         font-size: 1.6em;
-        color: #fff;
+        color: #000;
       width: 500px;
       display: block;
     }
@@ -74,7 +74,7 @@ const Navigation = styled.header`
       justify-content: space-between;
     }
     li {
-        color: #fff;        
+        color: #000;        
       margin: 0 15px;
       justify-content: space-between;
       font-size: 1.6em;

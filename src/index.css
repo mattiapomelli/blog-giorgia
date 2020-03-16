@@ -43,3 +43,15 @@ h1 {
     position: relative;
     margin-top: 15em;
 }
+
+body::-webkit-scrollbar {
+    width: 0.6rem;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f5f3f0;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #ba7894;
+}
