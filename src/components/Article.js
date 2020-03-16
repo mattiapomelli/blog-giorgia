@@ -18,6 +18,7 @@ export default class Article extends React.Component {
   
 
   componentDidMount() {
+    document.documentElement.scrollTop = 0
     const search = window.location.search; // could be '?foo=bar'
     const params = new URLSearchParams(search);
     const id = params.get("id"); // bar
@@ -45,10 +46,16 @@ export default class Article extends React.Component {
             html, body {
                 background-color: #EDEAE5 !important;
             }
+
+            @media only screen and (min-width: 600px) {
+                .back-button {
+                    display: none
+                }
+            }
             `}
             </style>
             <Container>
-            <Link to='/'><Button>Back</Button></Link>
+            <Link to='/' className="back-button"><Button>Back</Button></Link>
             </Container>
             <h1 className="title">{this.state.title}</h1>
             <h2 className="sub">{this.state.subtitle}</h2>
