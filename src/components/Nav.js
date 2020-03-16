@@ -214,13 +214,13 @@ class Nav extends Component {
           <ul className={`collapsed ${isExpanded ? "is-expanded" : ""}`}>
               {/* {this.setMargin()} */}
             <NavLink activeClassName="active" to="/">
-              <li>home</li>
+              <li>Home</li>
             </NavLink>
             <NavLink activeClassName="active" to="/about" onClick={() => {document.documentElement.scrollTop = 0}}>
-              <li>about</li>
+              <li>About</li>
             </NavLink>
             <NavLink activeClassName="active" to="/contact" onClick={() => {document.documentElement.scrollTop = 0}}>
-              <li>contact</li>
+              <li>Contact</li>
             </NavLink>
           </ul>
         </nav>
