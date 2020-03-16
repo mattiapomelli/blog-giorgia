@@ -18,7 +18,7 @@ export default class ModaleModifica extends React.Component {
   update() {
     axios
       .post(
-        "http://localhost:4000/Blog/update/" + this.props.articolo._id,
+        "http://2.238.196.146:4000/Blog/update/" + this.props.articolo._id,
         {
           Titolo: this.state.Titolo,
           Sottotitolo: this.state.Sottotitolo,
@@ -53,6 +53,7 @@ export default class ModaleModifica extends React.Component {
           <Modal.Description>
             <Form style={{ width: "30em" }}>
               <Form.Input
+              style={{backgroundColor:"#efd8d8"}}
                 fluid
                 label="Titolo"
                 value={this.state.Titolo}
@@ -61,6 +62,7 @@ export default class ModaleModifica extends React.Component {
                 onChange={this.handleChange.bind(this)}
               />
               <Form.Input
+              style={{backgroundColor:"#efd8d8"}}
                 fluid
                 label="Link immagine"
                 value={this.state.Immagine}
@@ -72,13 +74,14 @@ export default class ModaleModifica extends React.Component {
               <Form.TextArea
                 label="Sottotitlo"
                 name="Sottotitolo"
-                style={{ minWidth: "90%" }}
+                style={{ minWidth: "90%",backgroundColor:"#efd8d8" }}
                 control={TextArea}
                 error={this.state.Sottotitolo.length === 0}
                 value={this.state.Sottotitolo}
                 onChange={this.handleChange.bind(this)}
               ></Form.TextArea>
               <Form.TextArea
+              style={{backgroundColor:"#efd8d8"}}
                 label="Testo"
                 name="Testo"
                 control={TextArea}
@@ -90,10 +93,10 @@ export default class ModaleModifica extends React.Component {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions style={{backgroundColor: "#c997ac"}}>
-          <Button color="grey" onClick={this.props.close}>
+          <Button negative onClick={this.props.close}>
             <Icon name="delete" /> Annulla
           </Button>
-          <Button positive onClick={this.update.bind(this)} style={{backgroundColor: "#846587"}}>
+          <Button positive onClick={this.update.bind(this)} >
             <Icon name="checkmark" /> Modifica
           </Button>
         </Modal.Actions>

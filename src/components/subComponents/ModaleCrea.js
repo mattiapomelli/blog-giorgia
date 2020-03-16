@@ -21,7 +21,7 @@ export default class ModaleCrea extends React.Component{
       create() {
         axios
           .post(
-            "http://localhost:4000/Blog/add/",
+            "http://2.238.196.146:4000/Blog/add/",
             {
                 Titolo: this.state.Titolo,
                 Sottotitolo: this.state.Sottotitolo,
@@ -52,11 +52,12 @@ export default class ModaleCrea extends React.Component{
       render() {
         return (
           <>
-            <Modal.Header>Aggiungi nuovo articolo</Modal.Header>
-            <Modal.Content>
+            <Modal.Header style={{backgroundColor: "#c997ac"}}>Aggiungi nuovo articolo</Modal.Header>
+            <Modal.Content style={{backgroundColor: "#c997ac"}}>
               <Modal.Description>
                 <Form style={{ width: "30em" }}>
                   <Form.Input
+                    style={{backgroundColor:"#efd8d8"}}
                     fluid
                     label="Titolo"
                     value={this.state.Titolo}
@@ -64,6 +65,7 @@ export default class ModaleCrea extends React.Component{
                     onChange={this.handleChange.bind(this)}
                   />
                   <Form.Input
+                  style={{backgroundColor:"#efd8d8"}}
                     fluid
                     label="Link immagine"
                     value={this.state.Immagine}
@@ -74,12 +76,13 @@ export default class ModaleCrea extends React.Component{
                   <Form.TextArea
                     label="Sottotitlo"
                     name="Sottotitolo"
-                    style={{ minWidth: "90%" }}
+                    style={{ minWidth: "90%", backgroundColor:"#efd8d8" }}
                     control={TextArea}
                     value={this.state.Sottotitolo}
                     onChange={this.handleChange.bind(this)}
                   ></Form.TextArea>
                   <Form.TextArea
+                  style={{backgroundColor:"#efd8d8"}}
                     label="Testo"
                     name="Testo"
                     control={TextArea}
@@ -89,7 +92,7 @@ export default class ModaleCrea extends React.Component{
                 </Form>
               </Modal.Description>
             </Modal.Content>
-            <Modal.Actions>
+            <Modal.Actions style={{backgroundColor: "#c997ac"}}>
               <Button color="grey" onClick={this.props.close}>
                 <Icon name="delete" /> Annulla
               </Button>

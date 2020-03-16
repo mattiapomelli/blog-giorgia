@@ -12,7 +12,7 @@ export default class ModaleElimina extends React.Component{
     }
 
     delete = () => {
-        axios.delete('http://localhost:4000/Blog/delete/'+this.props.articolo._id,{
+        axios.delete('http://2.238.196.146:4000/Blog/delete/'+this.props.articolo._id,{
             headers:{
                 Authorization: process.env.REACT_APP_API_KEY
             },
