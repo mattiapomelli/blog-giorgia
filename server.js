@@ -103,11 +103,6 @@ gioRoutes.route('/delete/:id').delete((req, res, next) => {
 });
 
 app.use('/Blog', gioRoutes);
-
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'))
-}
-
 app.listen(PORT, function () {
     console.log("Server is running on Port: " + PORT);
 });
