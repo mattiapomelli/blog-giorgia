@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const gioRoutes = express.Router();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 let Articolo = require('./dataModel.js');
 const dotenv = require('dotenv');
 
@@ -12,7 +12,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 app.use(cors());
 app.use(bodyParser.json());
-mongoose.connect('mongodb://127.0.0.1:27017/Blog', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/Blog', {
     useUnifiedTopology: true,
     useNewUrlParser: true
 });
@@ -103,6 +103,11 @@ gioRoutes.route('/delete/:id').delete((req, res, next) => {
 });
 
 app.use('/Blog', gioRoutes);
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'))
+}
+
 app.listen(PORT, function () {
     console.log("Server is running on Port: " + PORT);
 });
